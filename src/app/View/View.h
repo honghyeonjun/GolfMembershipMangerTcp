@@ -6,7 +6,7 @@
 
 #pragma once
 
-enum{CARD_READER, CARD_REGISTER, FOUND_MEMBER};
+enum{CARD_READER, CARD_REGISTER, FOUND_MEMBER, DELETE_MEMBER};
 
 class View
 {
@@ -23,6 +23,8 @@ public:
     void MemberFound(std::string name);
     void MemberNotFound();
     void MemberRegisterMode();
+    void deleteMember();
+    void DeleteMember();
 private:
     LCD *lcd; 
     int membersManagerState;

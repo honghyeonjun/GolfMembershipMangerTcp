@@ -25,8 +25,12 @@ void View::GolfMembersInfo(int membersManagerState)
         break;
         case FOUND_MEMBER:
             foundMember();
-
+        
         break;
+        case DELETE_MEMBER:
+            deleteMember();
+        break;
+
     }            
 }
 
@@ -120,3 +124,21 @@ void View::MemberRegisterMode()
     sprintf(buff,"                   ");
     lcd -> WriteStringXY(1,0, buff);
 }   
+
+void View::deleteMember()
+{
+    char buff[30];
+    sprintf(buff,"delete member?        ");
+    lcd -> WriteStringXY(0,0, buff);
+    sprintf(buff,"                      ");
+    lcd -> WriteStringXY(1,0, buff);
+}
+void View::DeleteMember()
+{
+    char buff[30];
+    sprintf(buff,"delete member !!     ");
+    lcd -> WriteStringXY(0,0, buff);
+    sprintf(buff,"                      ");
+    lcd -> WriteStringXY(1,0, buff);
+}
+   

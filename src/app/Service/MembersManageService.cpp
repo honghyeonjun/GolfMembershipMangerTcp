@@ -4,7 +4,7 @@
 MembersManageService::MembersManageService(ComDev *comDev,View *view)
 {
     membersEntity = new MembersEntity();
-    membersManagerState = FOUND_MEMBER;
+    membersManagerState = DELETE_MEMBER;
     this ->view = view;
     this->comDev = comDev;
 
@@ -41,10 +41,19 @@ void MembersManageService::updateStateEvent(std::string devName)
         case FOUND_MEMBER :
             if(devName == "ModeButton") 
             {
-                membersManagerState = CARD_READER;
-                printf("changed to CARD_READER State\n");
+                membersManagerState = DELETE_MEMBER;
+                printf("changed to DELETE_MEMBER State\n");
                 view -> GolfMembersInfo(membersManagerState);
             }
+        break;
+        
+        case DELETE_MEMBER :
+        if(devName == "ModeButton") 
+        {
+            membersManagerState = CARD_READER;
+            printf("changed to CARD_READER State\n");
+            view -> GolfMembersInfo(membersManagerState);
+        }
         break;
     }
 }
@@ -70,6 +79,7 @@ void MembersManageService::checkCardNumber(int *cardNum)
                 view -> notRegisteredMember();
             }
         break;
+
         case CARD_REGISTER :
             MemberInfo tempMember;
             tempMember.id = id;
@@ -92,10 +102,18 @@ void MembersManageService::checkCardNumber(int *cardNum)
             view ->RegisteredMemberInfo(name);
         break;
 
+        case DELETE_MEMBER :
+            if (membersEntity->findMemberInfo(cardNum)) 
+            {
+                membersEntity->delMemberInfo(cardNum);
+                view -> DeleteMember();    
+            }
+        
+         break;
+
 
     }
 }
-
 void MembersManageService::findMember()
 {
         char MembersInfo[40];
@@ -116,3 +134,5 @@ void MembersManageService::findMember()
         }
 
 }
+
+
