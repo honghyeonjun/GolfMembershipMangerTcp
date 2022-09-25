@@ -44,10 +44,22 @@ void MembersEntity::printMemberInfo(int index)
            );
 }
 
-void MembersEntity::printMemberInfo(std::string name)
+void MembersEntity::printMemberInfo(std::string MembersInfo)
 {
-    for (const auto &member : vecMembersList) {
-        if (strcmp(member.name, name.c_str()) == 0) {
+    for (const auto &member : vecMembersList) 
+    {
+        if (strcmp(member.name, MembersInfo.c_str()) == 0) 
+        {
+            printMemberInfo(member.id);
+            return;
+        }
+        if (strcmp(member.address, MembersInfo.c_str()) == 0) 
+        {
+            printMemberInfo(member.id);
+            return;
+        }
+        if (strcmp(member.phoneNumber, MembersInfo.c_str()) == 0) 
+        {
             printMemberInfo(member.id);
             return;
         }
@@ -75,11 +87,22 @@ void MembersEntity::printMemberInfo(int *cardNum)
     }
 }
 
-bool MembersEntity::findMemberInfo(std::string name)
+bool MembersEntity::findMemberInfo(std::string MembersInfo)
 {
     for (const auto &member : vecMembersList) {
-        if (strcmp(member.name, name.c_str()) == 0) {
-            printMemberInfo(member.id);
+        if (strcmp(member.name, MembersInfo.c_str()) == 0) 
+        {
+            // printMemberInfo(member.id);
+            return true;
+        }
+        if (strcmp(member.address, MembersInfo.c_str()) == 0) 
+        {
+            // printMemberInfo(member.id);
+            return true;
+        }
+        if (strcmp(member.phoneNumber, MembersInfo.c_str()) == 0) 
+        {
+            // printMemberInfo(member.id);
             return true;
         }
     }
@@ -117,7 +140,7 @@ bool MembersEntity::delMemberInfo(int *cardNum)
 
 void MembersEntity::memoryToDB()
 {
-    fpDBData = fopen("memberLists.bin", "w"); //NULL
+    fpDBData = fopen("memberLists.bin", "a+"); //NULL
     FILE *fpDBData2 = fopen("memberLists.txt", "w"); //NULL
     if (fpDBData == NULL) {
         fprintf(stderr, "file open error!\n");

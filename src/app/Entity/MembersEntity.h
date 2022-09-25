@@ -21,10 +21,10 @@ public:
     bool delMemberInfo(int *cardNum);
     void memoryToDB();
     void printMemberInfo(int index);
-    void printMemberInfo(std::string name);
+    void printMemberInfo(std::string MembersInfo);
     void printMemberInfo(int *cardNum);
     bool findMemberInfo(int *cardNum);
-    bool findMemberInfo(std::string name);
+    bool findMemberInfo(std::string MembersInfo);
 };
 
 #endif /* __MEMBERSENTITY_H__ */
